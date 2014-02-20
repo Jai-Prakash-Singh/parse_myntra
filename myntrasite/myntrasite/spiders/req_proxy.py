@@ -14,7 +14,7 @@ def main(link):
     loop = True
     i = 0 
 
-    while i < 2 and loop is True:
+    while i < 3 and loop is True:
         pass_ip = choice(pass_ip_list).strip()
 
 	i = i + 1
