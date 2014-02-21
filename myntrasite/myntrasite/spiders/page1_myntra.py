@@ -5,7 +5,9 @@ from bs4 import BeautifulSoup
 from urlparse import urlparse
 from urlparse import urlparse
 import phan_proxy
+import time
 # page1_myntra.py  page2_myntra.main()
+import os 
 
 
 def menucollection(a):
@@ -28,6 +30,14 @@ def menucollection(a):
 
 
 def main():
+    dte = "dir%s" %(time.strftime("%d%m%Y"))
+   
+    try:
+        os.makedirs(dte)
+    except:
+        pass
+
+
     link = "http://www.myntra.com/"
     page  = req_proxy.main(link) 
     #page = phan_proxy.main(link)

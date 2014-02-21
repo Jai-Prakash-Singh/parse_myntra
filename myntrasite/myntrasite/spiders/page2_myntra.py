@@ -16,19 +16,8 @@ logging.basicConfig(level=logging.DEBUG,
 
 
 def main3(ntl_pth_cat):
-    link1 = ntl_pth_cat[0]
-    page = req_proxy.main(link1)     
+    page2_clb_myntra.main(ntl_pth_cat)
          
-    if not page:
-        f = open("page2_extract_no.txt", "a+")
-	print >>f, link1
-        f.close()
-	 
-    else:
-       f = open("page2_extracted_yes.txt", "a+")
-       print >>f, link1
-       f.close()
-
 
 
 
