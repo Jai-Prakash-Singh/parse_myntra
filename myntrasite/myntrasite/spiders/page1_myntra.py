@@ -51,6 +51,15 @@ def main():
     tag_mklevel2 = soup.find_all("a", attrs={"class":"mk-level2 "})
     
     #print len(filter(None,  map(menucollection, tag_mklevel2)))    
+    f = open("to_extract.txt", "w+")
+    f2 = open("extracted.txt", "a+")
+
+    print >>f, dte
+    print >>f2, dte
+
+    f.close()
+    f2.close()
+
     return   filter(None,  map(menucollection, tag_mklevel2))
     
 
