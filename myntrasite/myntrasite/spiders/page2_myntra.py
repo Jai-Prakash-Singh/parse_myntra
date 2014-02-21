@@ -13,9 +13,15 @@ import page2_clb_myntra
 logging.basicConfig(level=logging.DEBUG,
                     format='[%(levelname)s] (%(threadName)-10s) %(message)s',
 		                        )
+def worker():
+    print threading.currentThread().getName(), 'Starting'
+    time.sleep(2)
+    print threading.currentThread().getName(), 'Exiting'
 
 
+ 
 def main3(ntl_pth_cat):
+    
     page2_clb_myntra.main(ntl_pth_cat)
          
 
@@ -26,8 +32,10 @@ def main2(list_ntl_pth_cat2):
         t = threading.Thread(target=main3,  args = (ntl_pth_cat,))
         t.start()
         time.sleep(1)
-
-
+    
+    w = threading.Thread(name='worker', target=worker)
+    w.start()
+    w.join()
 
 def main():
     list_ntl_pth_cat = page1_myntra.main()

@@ -13,7 +13,9 @@ import time
 logging.basicConfig(level=logging.DEBUG,
                     format='[%(levelname)s] (%(threadName)-10s) %(message)s',
                     )
+
 dte = time.strftime("%d%m%Y")
+
 
 
 def main3(ntl_pth_cat, a):
@@ -28,14 +30,14 @@ def main3(ntl_pth_cat, a):
     f.close()
 
     logging.debug([ntl_pth_cat[0], ntl_pth_cat[1], ntl_pth_cat[2], bl, bnbc])
-
+    
 
 
 def main2(ntl_pth_cat, page):
     soup = BeautifulSoup(page)
     tag_a = soup.find_all("a", attrs={"data-key":"brands"})
      
-    if tag_a:
+    if tag_a: 
         for a in tag_a:
             main3(ntl_pth_cat, a)
 
@@ -49,6 +51,12 @@ def main(ntl_pth_cat):
 
     if not page:
         main(ntl_pth_cat)
+    
+    filename = "dir%s/%s" %(time.strftime("%d%m%Y"), "cl_cpth_sc_bl_bn_bc_links_extracted.txt")
+
+    f = open(filename, "a+")
+    print >>f, link
+    f.close()
 
     main2(ntl_pth_cat, page)
     
