@@ -4,7 +4,8 @@ import profile
 from bs4 import BeautifulSoup 
 from urlparse import urlparse
 from urlparse import urlparse
-
+import phan_proxy
+# page1_myntra.py  page2_myntra.main()
 
 
 def menucollection(a):
@@ -28,13 +29,20 @@ def menucollection(a):
 
 def main():
     link = "http://www.myntra.com/"
-    page  = req_proxy.main(link)
+    page  = req_proxy.main(link) 
+    #page = phan_proxy.main(link)
+   
+    
+    if  not page:
+        main()
     
     soup = BeautifulSoup(page)
 
     tag_mklevel2 = soup.find_all("a", attrs={"class":"mk-level2 "})
     
-    return  filter(None,  map(menucollection, tag_mklevel2))
+    #print len(filter(None,  map(menucollection, tag_mklevel2)))    
+    return   filter(None,  map(menucollection, tag_mklevel2))
+    
 
 
 
