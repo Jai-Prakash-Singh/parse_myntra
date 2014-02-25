@@ -21,8 +21,11 @@ dte = time.strftime("%d%m%Y")
 def main3(ntl_pth_cat, a):
     bnbc = a.find("span", attrs={"class":["mk-filter-display"]})
     bnbc = str(bnbc.get_text()).replace("\n", " ").replace("\t", " ").replace("\r", " ").strip()
-    bl = "http://www.myntra.com%s" %(a.get("href"))
+    #bl = "http://www.myntra.com%s" %(a.get("href"))
+    br = bnbc.split("[")[0].strip()
+    bl = "%s#!brands=%s" %(ntl_pth_cat[0], br)
 
+    #print [ntl_pth_cat[0], ntl_pth_cat[1], ntl_pth_cat[2], bl, bnbc]
     filename = "dir%s/%s" %(time.strftime("%d%m%Y"), "cl_cpth_sc_bl_bn_bc.txt")
  
     f = open(filename, "a+")
@@ -53,7 +56,8 @@ def main(ntl_pth_cat):
         main(ntl_pth_cat)
     
     filename = "dir%s/%s" %(time.strftime("%d%m%Y"), "cl_cpth_sc_bl_bn_bc_links_extracted.txt")
-
+     
+    #filename = "dir23022014/cl_cpth_sc_bl_bn_bc_links_extracted.txt"  
     f = open(filename, "a+")
     print >>f, link
     f.close()
