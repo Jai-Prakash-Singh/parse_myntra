@@ -26,7 +26,10 @@ enclosure_queue = Queue()
 def main2(i, q):
     while True:
         ntl_pth_cat = q.get()
-        page2_clb_myntra.main(ntl_pth_cat)
+        try:
+            page2_clb_myntra.main(ntl_pth_cat)
+        except:
+            pass
         time.sleep(i + 2)
         q.task_done()
     

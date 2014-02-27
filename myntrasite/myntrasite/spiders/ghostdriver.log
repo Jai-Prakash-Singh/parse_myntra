@@ -1,5 +1,2 @@
 PhantomJS is launching GhostDriver...
-Ghost Driver running on port 60719
-Asynchronous Sessions cleanup phase starting NOW
-About to delete Session 'ce0ad100-9e04-11e3-8f30-493869f790cc', because windowless...
-... deleted!
+Ghost Driver running on port 37672

@@ -11,7 +11,7 @@ def main():
     page1_myntra.main()
     page2_myntra.main()
     page2_scroller_myntra.main()
-    #page3_filedivision_myntra.main()
+    page3_filedivision_myntra.main()
 
 
 if __name__=="__main__":

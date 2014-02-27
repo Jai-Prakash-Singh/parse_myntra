@@ -12,26 +12,33 @@ logging.basicConfig(level=logging.DEBUG,
 		                        )
 # page2_scroller_myntra.py, page2_sub_scroller.py
 
-num_fetch_threads = 50
-#enclosure_queue = Queue()
-enclosure_queue = multiprocessing.JoinableQueue()
 
 
 
-def main2(i, q):
-    #while True:
-    for line in iter(q.get, None):
-        line = q.get()
-	logging.debug((line))
-        try:
-            page2_sub_scroller.main(line)
-        except:
-            pass
+def main3(line):
+    try:
+        page2_sub_scroller.main(line)
 
-        time.sleep(2)
-	q.task_done()
+    except:
+        pass
 
-    q.task_done()
+
+
+
+def main2(enclosure_queue2):
+    
+    i= 0 
+
+    for line in enclosure_queue2:
+        i = i+1
+        p = multiprocessing.Process(name = i, target=main3, args=(line,))
+        logging.debug((multiprocessing.current_process(), "started"))
+        p.start()
+      
+        time.sleep(2)  
+
+    del enclosure_queue2[:]
+
 
 
 def main():
@@ -40,33 +47,23 @@ def main():
     f.close()
 
     filename = "%s/%s" %(directory, "cl_cpth_sc_bl_bn_bc.txt")
-   
-    f = open(filename)
-    
-    procs = []
 
-    for i in range(num_fetch_threads):
-        procs.append(Process(target = main2, args=(i, enclosure_queue,)))
-	#worker.setDaemon(True)
-	procs[-1].start()
+    f = open(filename)
+
+    enclosure_queue = []
 
     for line in f:
-        enclosure_queue.put((line))
+        enclosure_queue.append(line)
 
-    print '*** Main thread waiting'
-    enclosure_queue.join()
-    print '*** Done'
-
-    for p in procs:
-        enclosure_queue.put( None )
-
-    enclosure_queue.join()
-
-    for p in procs:
-        p.join()
+        if len(enclosure_queue) > 100:
+            main2(enclosure_queue[:])
+            del enclosure_queue[:]
+            
+    main2(enclosure_queue[:])
+    del enclosure_queue[:]     
  
-    
-
+    print "Finished everything...."
+    print "num active children:", multiprocessing.active_children()
 
 
 if __name__=="__main__":

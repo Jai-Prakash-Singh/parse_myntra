@@ -94,11 +94,11 @@ class DmozSpider(Spider):
 
             directory = '/'.join(self.pth2[:-1])
 
-            filename = "%s/%s%s" %(directory , self.pth2[-1][:-5],  ".doc")
+            filename = "%s/%s%s" %(directory , self.pth2[-1][:-5],  ".csv")
             f = open(filename, "a+")
-	    print >>f, [sku, title, link, sp, category, subcat, brand, image, mrp, 
+	    print >>f, ','.join([sku, title, link, sp, category, subcat, brand, image, mrp, 
 	                colour, target, link, vender, metatitle, metadisc, buttons, 
-		        desc, spec, date, status]
+		        desc, spec, date, status])
             f.close()
 
             print[link, "ok"]
